@@ -7,5 +7,7 @@ import os
 SECRET_KEY = os.environ.get('SECRET_KEY')
 FACEBOOK_APP_ID = os.environ.get('FACEBOOK_APP_ID')
 
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(BASE_DIR, 'app.db')
