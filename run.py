@@ -1,4 +1,3 @@
-import apps
 from apps import app
 
 
