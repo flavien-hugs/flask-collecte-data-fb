@@ -17,18 +17,14 @@ class TestUserTakesTheTest(LiveServerTestCase):
 
     def setUp(self):
 
-        USER_ID = app.config['FB_USER_ID']
-        USER_NAME = app.config['FB_USER_NAME']
-        USER_GENDER = app.config['FB_USER_GENDER']
-
         self.driver = webdriver.Chromium()
         models.init_db()
 
         self.result_page = url_for(
             'result',
-            id=USER_ID,
-            gender=USER_GENDER,
-            first_name=USER_NAME,
+            id=app.config['FB_USER_ID'],
+            gender=app.config['FB_USER_GENDER'],
+            first_name=app.config['FB_USER_NAME'],
             _external=True
         )
         self.wait = ui.WebDriverWait(self.driver, 1000)
@@ -45,12 +41,10 @@ class TestUserTakesTheTest(LiveServerTestCase):
         text_field.send_keys(text)
 
     def submitsForm(self):
-        USER_EMAIL = app.config['FB_USER_EMAIL']
-        USER_PASSWORD = app.config['FB_USER_PW']
         BTN_LOGIN = '#loginbutton input[name=login]'
 
-        self.enterTextField('#email', USER_EMAIL)
-        self.enterTextField('#pass', USER_PASSWORD)
+        self.enterTextField('#email', app.config['FB_USER_EMAIL'])
+        self.enterTextField('#pass', app.config['FB_USER_PW'])
         self.getElement(BTN_LOGIN).click()
 
     def seesLoginPage(self):
