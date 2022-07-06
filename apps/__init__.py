@@ -1,11 +1,10 @@
-import os
 from flask import Flask
 
-from .views import app
-from . import models
+from apps.views import app
+from apps.models import db
 
-models.db.init_app(app)
+db.init_app(app)
 
 @app.cli.command("init-db")
 def create_db():
-    models.init_db()
+    db.init_db()
