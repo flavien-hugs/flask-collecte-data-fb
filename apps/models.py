@@ -2,9 +2,8 @@ import enum
 import logging as lg
 from flask_sqlalchemy import SQLAlchemy
 
-from .views import app
+db = SQLAlchemy()
 
-db = SQLAlchemy(app)
 
 class Gender(enum.Enum):
     male = 0
