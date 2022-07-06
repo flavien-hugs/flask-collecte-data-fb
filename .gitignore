@@ -4,6 +4,9 @@
 .vscode
 .flaskenv
 Pipfile.lock
+app.db
+tests/test_app.db
+*.db
 
 venv/
 *.pyc
@@ -15,3 +18,5 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+geckodriver.log
+*.log
