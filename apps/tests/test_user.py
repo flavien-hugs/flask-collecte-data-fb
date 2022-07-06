@@ -21,7 +21,7 @@ class TestUserTakesTheTest(LiveServerTestCase):
         USER_NAME = app.config['FB_USER_NAME']
         USER_GENDER = app.config['FB_USER_GENDER']
 
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.Chromium()
         models.init_db()
 
         self.result_page = url_for(
