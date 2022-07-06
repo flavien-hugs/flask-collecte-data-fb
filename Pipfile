@@ -10,6 +10,9 @@ flask-sqlalchemy = "*"
 pillow = "*"
 
 [dev-packages]
+pytest = "*"
+flask-testing = "*"
+selenium = "*"
 
 [requires]
 python_version = "3.8"
