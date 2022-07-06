@@ -2,6 +2,7 @@
 .env
 .idea
 .vscode
+.flaskenv
 Pipfile.lock
 
 venv/
