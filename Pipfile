@@ -8,6 +8,8 @@ flask = "*"
 python-dotenv = "*"
 flask-sqlalchemy = "*"
 pillow = "*"
+psycopg2 = "*"
+gunicorn = "*"
 
 [dev-packages]
 pytest = "*"
