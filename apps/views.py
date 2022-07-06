@@ -1,4 +1,4 @@
-from .utils import find_content
+from .utils import find_content, OpenGraphImage
 from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
@@ -7,14 +7,14 @@ app.config.from_object('config')
 
 @app.route('/')
 @app.route('/index/')
-def indexView():
+def index():
 
     if 'img' in request.args:
         img = request.args.get('img')
-        opg_url = url_for('indexView', img=img, _external=True)
+        opg_url = url_for('index', img=img, _external=True)
         opg_image = url_for('static', filename=img, _external=True)
     else:
-        opg_url = url_for('indexView', _external=True)
+        opg_url = url_for('index', _external=True)
         opg_image = url_for('static', filename='tmp/smaple.jpg', _external=True)
 
     user_name = 'Flavien HUGS'
@@ -24,7 +24,7 @@ def indexView():
     description = """
         Toi, tu sais comment utiliser la console !
         Jamais à court d'idées pour réaliser ton objectif,
-        tu es déterminé-e et persévérant-e. Tes amis disent d'ailleurs 
+        tu es déterminé-e et persévérant-e. Tes amis disent d'ailleurs
         volontiers que tu as du caractère et que tu ne te laisses
         pas marcher sur les pieds. Un peu hacker sur les bords,
         tu aimes trouver des solutions à tout problème.
@@ -45,20 +45,20 @@ def indexView():
 
 
 @app.route('/result/')
-def resultView():
+def result():
 
-    user_id = request.args.get('id')
-    user_gender = request.args.get('gender')
+    uid = request.args.get('id')
+    gender = request.args.get('gender')
     user_name = request.args.get('first_name')
-    opg_image = url_for('static', filename='tmp/smaple.jpg')
-    opg_url = url_for('index', img=img, _external=True)
-    user_image = 'http://graph.facebook.com/' + user_id + '/picture?type=large'
-    description = find_content(gender).description
+    user_desc = find_content(gender).description
+    opg_image = OpenGraphImage(uid, user_name, user_desc).location
+    opg_url = url_for('index', img=opg_image, _external=True)
+    user_image = 'http://graph.facebook.com/' + uid + '/picture?type=large'
 
     return render_template(
         'result.html',
         opg_url=opg_url,
         user_name=user_name,
         user_image=user_image,
-        description=description
+        description=user_desc
     )
